@@ -6,13 +6,17 @@ import java.util.stream.Collectors;
 public class RestaurantService {
     private static List<Restaurant> restaurants = new ArrayList<>();
 
-    public Restaurant findRestaurantByName(String restaurantName) {
+    public Restaurant findRestaurantByName(String restaurantName) throws restaurantNotFoundException {
+        Restaurant restaurant = null;
         for (Restaurant r : restaurants) {
             if (r.getName().equalsIgnoreCase(restaurantName)) {
-                return r;
+                return restaurant = r;
             }
         }
-        return null;
+        if (restaurant == null) {
+           throw new restaurantNotFoundException("Restartant not found " + restaurantName);
+        }
+        return restaurant;
     }
 
 
